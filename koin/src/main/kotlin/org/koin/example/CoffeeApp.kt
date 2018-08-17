@@ -1,29 +1,35 @@
 package org.koin.example
 
-import org.koin.core.time.Duration
-import org.koin.log.EmptyLogger
+import org.koin.core.Koin
+import org.koin.core.time.measureDuration
 import org.koin.log.PrintLogger
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.StandAloneContext.startKoin
+import org.koin.standalone.StandAloneContext.loadKoinModules
 import org.koin.standalone.inject
 
-class CoffeeApp : KoinComponent, Runnable {
+class CoffeeApp : KoinComponent {
 
     val coffeeMaker: CoffeeMaker by inject()
 
-    override fun run() {
+    fun brew() {
         coffeeMaker.brew()
     }
 }
 
 fun main(vararg args: String) {
-    val duration = Duration()
-    duration.start()
+    val global = measureDuration {
+        val koinStartDuration = measureDuration {
+            Koin.logger = PrintLogger(showDebug = true)
+            loadKoinModules(coffeeMakerReflectModule)
+        }
 
-    startKoin(listOf(coffeeMakerModule), logger = PrintLogger(showDebug = true))
-    CoffeeApp().run()
+        println("koin started in $koinStartDuration ms")
 
-    duration.stop()
+        val appDuration = measureDuration {
+            CoffeeApp().brew()
+        }
+        println("App run in $appDuration ms")
+    }
 
-    println("executed in ${duration.durationInMs()} ms")
+    println("executed in $global ms")
 }
