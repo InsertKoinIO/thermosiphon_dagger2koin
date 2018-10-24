@@ -3,6 +3,7 @@ package org.koin.example
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.koin.log.PrintLogger
 import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.inject
@@ -19,7 +20,7 @@ class CoffeeMakerTest : KoinTest {
 
     @Before
     fun before() {
-        startKoin(listOf(coffeeMakerModule))
+        startKoin(listOf(coffeeAppModule), logger = PrintLogger(showDebug = true))
         declareMock<Heater>()
     }
 
