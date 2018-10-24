@@ -11,17 +11,16 @@ class CoffeeApp : KoinComponent {
     val maker: CoffeeMaker by inject()
 }
 
-
 fun main(vararg args: String) {
 
     startKoin(
         list = listOf(coffeeAppModule),
         logger = EmptyLogger()
     )
-    val coffeeApp = CoffeeApp()
+    val coffeeShop = CoffeeApp()
 
     val appDuration = measureTimeMillis {
-        coffeeApp.maker.brew()
+        coffeeShop.maker.brew()
     }
 
     println("executed in $appDuration ms")
