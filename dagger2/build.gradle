@@ -4,7 +4,7 @@ ext {
 
 buildscript {
     ext {
-        kotlin_version = "1.2.51"
+        kotlin_version = "1.2.71"
     }
     repositories {
         jcenter()
@@ -26,7 +26,6 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }
