@@ -1,6 +1,6 @@
 ext {
-    koin_version = "1.0.1-ext"
-//    koin_version = "1.0.2-alpha-5"
+//    koin_version = "1.0.1-ext"
+    koin_version = "1.0.2-alpha-6"
 }
 
 buildscript {
