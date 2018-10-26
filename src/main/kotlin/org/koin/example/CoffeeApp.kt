@@ -1,6 +1,6 @@
 package org.koin.example
 
-import org.koin.log.PrintLogger
+import org.koin.log.EmptyLogger
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.inject
@@ -14,7 +14,7 @@ fun main(vararg args: String) {
 
     startKoin(
         list = listOf(coffeeAppModule),
-        logger = PrintLogger()
+        logger = EmptyLogger()
     )
 
     val coffeeShop = CoffeeApp()
