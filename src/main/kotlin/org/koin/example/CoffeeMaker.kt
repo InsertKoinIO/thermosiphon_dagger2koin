@@ -5,8 +5,9 @@ import org.koin.standalone.inject
 import javax.inject.Inject
 
 
-class CoffeeMaker @Inject constructor(private val pump: Pump) : KoinComponent {
+class CoffeeMaker @Inject constructor() : KoinComponent {
 
+    val pump: Pump by inject()
     val heater: Heater by inject()
 //    val heater: Heater by lazy { _heater.get() }
 

@@ -7,7 +7,7 @@ import javax.inject.Singleton
 import kotlin.system.measureTimeMillis
 
 @Singleton
-@Component(modules = [PumpModule::class])
+@Component
 interface CoffeeApp {
     fun maker(): CoffeeMaker
 }
