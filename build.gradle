@@ -1,0 +1,36 @@
+ext {
+    dagger_version = "2.17"
+    koin_version = "1.0.2-alpha-7"
+}
+
+buildscript {
+    ext {
+        kotlin_version = "1.2.71"
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+archivesBaseName = 'coffee-maker-dagger'
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.koin:koin-core:$koin_version"
+    testCompile "org.koin:koin-test:$koin_version"
+    
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+}
+
