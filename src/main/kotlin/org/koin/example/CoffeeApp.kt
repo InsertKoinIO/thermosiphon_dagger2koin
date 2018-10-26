@@ -1,15 +1,13 @@
 package org.koin.example
 
-import dagger.Component
 import org.koin.log.PrintLogger
+import org.koin.standalone.KoinComponent
 import org.koin.standalone.StandAloneContext.startKoin
-import javax.inject.Singleton
+import org.koin.standalone.inject
 import kotlin.system.measureTimeMillis
 
-@Singleton
-@Component
-interface CoffeeApp {
-    fun maker(): CoffeeMaker
+class CoffeeApp : KoinComponent {
+    val maker: CoffeeMaker by inject()
 }
 
 fun main(vararg args: String) {
@@ -19,10 +17,10 @@ fun main(vararg args: String) {
         logger = PrintLogger()
     )
 
-    val coffeeShop = DaggerCoffeeApp.builder().build()
+    val coffeeShop = CoffeeApp()
 
     val duration = measureTimeMillis {
-        coffeeShop.maker().brew()
+        coffeeShop.maker.brew()
     }
 
     println("executed in $duration ms")

@@ -30,7 +30,7 @@ dependencies {
     compile "org.koin:koin-core:$koin_version"
     testCompile "org.koin:koin-test:$koin_version"
     
-    implementation "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+//    implementation "com.google.dagger:dagger:$dagger_version"
+//    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }
 
