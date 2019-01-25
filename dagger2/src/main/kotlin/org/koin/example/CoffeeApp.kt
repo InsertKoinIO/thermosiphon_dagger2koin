@@ -10,7 +10,7 @@ interface CoffeeApp {
     fun maker(): CoffeeMaker
 }
 
-fun main(vararg args: String) {
+fun main() {
 
     val coffeeShop = DaggerCoffeeApp.builder().build()
 
