@@ -5,6 +5,7 @@ import org.junit.Before
 import org.junit.Test
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
+import org.koin.core.logger.Level
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import org.koin.test.mock.declareMock
@@ -20,7 +21,7 @@ class CoffeeMakerTest : KoinTest {
     @Before
     fun before() {
         startKoin {
-            logger()
+            printLogger(Level.DEBUG)
             modules(coffeeAppModule)
         }
 

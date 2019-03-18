@@ -2,7 +2,6 @@ package org.koin.example
 
 import dagger.Component
 import javax.inject.Singleton
-import kotlin.system.measureTimeMillis
 
 @Singleton
 @Component(modules = [DripCoffeeModule::class])
@@ -11,12 +10,22 @@ interface CoffeeApp {
 }
 
 fun main() {
-
-    val coffeeShop = DaggerCoffeeApp.builder().build()
-
-    val duration = measureTimeMillis {
+    lateinit var coffeeShop: CoffeeApp
+    measure("startup") {
+        coffeeShop = DaggerCoffeeApp.builder().build()
+    }
+    measure("execution #1") {
         coffeeShop.maker().brew()
     }
+    measure("execution #2") {
+        coffeeShop.maker().brew()
+    }
+}
 
-    println("executed in $duration ms")
+
+fun measure(msg: String, code: () -> Unit) {
+    val start = System.nanoTime()
+    code()
+    val time = (System.nanoTime() - start) / 1000000.0
+    println("$msg - $time ms")
 }

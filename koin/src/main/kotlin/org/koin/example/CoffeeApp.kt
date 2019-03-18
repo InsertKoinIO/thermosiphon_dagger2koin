@@ -3,7 +3,6 @@ package org.koin.example
 import org.koin.core.KoinComponent
 import org.koin.core.context.startKoin
 import org.koin.core.inject
-import kotlin.system.measureTimeMillis
 
 class CoffeeApp : KoinComponent {
 
@@ -11,15 +10,22 @@ class CoffeeApp : KoinComponent {
 }
 
 fun main() {
-
-    startKoin {
-        logger()
-        modules(coffeeAppModule)
+    measure("startup") {
+        startKoin {
+            modules(coffeeAppModule)
+        }
     }
-
-    val appDuration = measureTimeMillis {
+    measure("execution #1") {
         CoffeeApp().maker.brew()
     }
+    measure("execution #2") {
+        CoffeeApp().maker.brew()
+    }
+}
 
-    println("executed in $appDuration ms")
+fun measure(msg: String, code: () -> Unit) {
+    val start = System.nanoTime()
+    code()
+    val time = (System.nanoTime() - start) / 1000000.0
+    println("$msg - $time ms")
 }
