@@ -2,6 +2,7 @@ package org.koin.example
 
 import org.koin.core.KoinComponent
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.core.inject
 
 class CoffeeApp : KoinComponent {
@@ -10,17 +11,26 @@ class CoffeeApp : KoinComponent {
 }
 
 fun main() {
+    run()
+    run()
+}
+
+private fun run() {
     measure("startup") {
         startKoin {
+//            printLogger()
             modules(coffeeAppModule)
         }
     }
-    measure("execution #1") {
-        CoffeeApp().maker.brew()
+    measure("execution") {
+        val maker = CoffeeApp().maker
+        maker.brew()
     }
-    measure("execution #2") {
-        CoffeeApp().maker.brew()
+    measure("execution") {
+        val maker = CoffeeApp().maker
+        maker.brew()
     }
+    stopKoin()
 }
 
 fun measure(msg: String, code: () -> Unit) {

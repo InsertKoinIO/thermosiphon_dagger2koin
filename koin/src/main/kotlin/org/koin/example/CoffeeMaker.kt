@@ -1,11 +1,11 @@
 package org.koin.example
 
 
-class CoffeeMaker(private val pump: Pump, private val _heater: Lazy<Heater>) {
+class CoffeeMaker(private val pump: Pump, _heater: Lazy<Heater>) {
 
-    // Don't want to create a possibly costly heater until we need it.
-    val heater: Heater by lazy { _heater.value }
+    val heater by _heater
 
+    // Don't want to create a possibly costly _heater until we need it.
     fun brew() {
         heater.on()
         pump.pump()

@@ -10,15 +10,23 @@ interface CoffeeApp {
 }
 
 fun main() {
+    run()
+    run()
+}
+
+private fun run() {
     lateinit var coffeeShop: CoffeeApp
     measure("startup") {
-        coffeeShop = DaggerCoffeeApp.builder().build()
+        coffeeShop = DaggerCoffeeApp
+                .builder().build()
     }
-    measure("execution #1") {
-        coffeeShop.maker().brew()
+    measure("execution") {
+        val maker = coffeeShop.maker()
+        maker.brew()
     }
-    measure("execution #2") {
-        coffeeShop.maker().brew()
+    measure("execution") {
+        val maker = coffeeShop.maker()
+        maker.brew()
     }
 }
 
